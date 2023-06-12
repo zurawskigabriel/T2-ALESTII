@@ -20,6 +20,7 @@ public class OnePiece{
         
         try {
             Scanner leitor = new Scanner(exemplo);
+
             // Lê a linha com as dimensões e calcula o total de vértices para criar o grafo do mapa
             dimensoes = leitor.nextLine();
             String[] partes = dimensoes.split("\\D+");
@@ -29,19 +30,23 @@ public class OnePiece{
             Graph mapa = new Graph(tamanho);
             System.out.println(linhas);
             System.out.println(colunas);
+
             // Laço para andar nas linhas
             for(int i = 0; i < linhas; i++){
                 linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
+
                 // Laço para andar nas colunas
                 for(int j = 0; j < colunas; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
                     proximo = linha.charAt(j + 1); // Salva o caractere a esquerda
                     abaixo = linha.charAt((i+1) * j); // Salva o caractere abaixo
-                    System.out.println(j);
+                    
+
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
                     if(atual == '.' && proximo != '*' && j < colunas) {
                         int aux = j + 1;
-                        mapa.addEdge(atual, aux);
+                        mapa.addEdge(j, aux);
+                        System.out.println(j);
                         
                     }
 
