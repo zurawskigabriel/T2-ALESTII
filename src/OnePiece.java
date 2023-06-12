@@ -28,26 +28,23 @@ public class OnePiece{
             colunas = Integer.parseInt(partes[1]);
             tamanho = linhas * colunas;
             Graph mapa = new Graph(tamanho);
-            System.out.println(linhas);
-            System.out.println(colunas);
 
             // Laço para andar nas linhas
-            for(int i = 0; i < linhas; i++){
+            for(int i = 0; i < linhas - 1; i++){
                 linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
 
                 // Laço para andar nas colunas
-                for(int j = 0; j < colunas; j++) {
+                for(int j = 0; j < colunas - 1; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
                     proximo = linha.charAt(j + 1); // Salva o caractere a esquerda
-                    abaixo = linha.charAt((i+1) * j); // Salva o caractere abaixo
+                    //abaixo = linha.charAt(((i+1) * linhas) + j); // Salva o caractere abaixo
                     
 
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
                     if(atual == '.' && proximo != '*' && j < colunas) {
-                        int aux = j + 1;
-                        mapa.addEdge(j, aux);
-                        System.out.println(j);
-                        
+                        int aux1 = (i * linhas) + j;
+                        int aux2 = (i * linhas) + (j + 1);
+                        mapa.addEdge(aux1, aux2);
                     }
 
                     // Verifica se o caractere abaixo é navegavel para criar uma aresta
@@ -71,12 +68,11 @@ public class OnePiece{
             leitor.close();
 
             //System.out.println(mapa.toString());
-            //System.out.println(mapa.degree(1300));
-            //System.out.println(mapa.degree(1));
-            //System.out.println(mapa.degree(2));
-            //System.out.println(mapa.degree(3));
-            //System.out.println(mapa.degree(4));
-            //System.out.println(mapa.degree(5));
+            System.out.println(mapa.degree(1));
+            System.out.println(mapa.degree(2));
+            System.out.println(mapa.degree(3));
+            System.out.println(mapa.degree(4));
+            System.out.println(mapa.degree(5));
 
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
