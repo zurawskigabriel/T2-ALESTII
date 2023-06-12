@@ -26,21 +26,23 @@ public class OnePiece{
             tamanho = linhas * colunas;
             Graph mapa = new Graph(tamanho);
 
+
             // Laço para andar nas linhas
             for(int i = 0; i < linhas; i++){
                 linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
                 // Laço para andar nas colunas
                 for(int j = 0; j < colunas; j++) {
-                    valor = linha.charAt((i * colunas) + j); // Salva o caractere de cada coluna 
+
+                    valor = linha.charAt(j); // Salva o caractere de cada coluna 
 
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
-                    if(valor == '.' && ((i * colunas) + j) + 1 != '*') {
-                        mapa.addEdge(valor, ((i * colunas) + j) + 1);
+                    if(valor == '.' && (j + 1) != '*') {
+                        mapa.addEdge(valor, (j + 1));
                     }
 
                     // Verifica se o caractere abaixo é navegavel para criar uma aresta
-                    if(valor == '.' && (((i+1) * colunas) + j) != '*') {
-                        mapa.addEdge(valor, (((i+1) * colunas) + j));
+                    if(valor == '.' && ((i+1) * j) != '*') {
+                        mapa.addEdge(valor, ((i+1) * j));
                     }
 
                     // Salva os endereços dos portos
@@ -58,7 +60,7 @@ public class OnePiece{
 
             leitor.close();
 
-            System.out.println(mapa.toDot());
+            System.out.println(mapa);
 
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
