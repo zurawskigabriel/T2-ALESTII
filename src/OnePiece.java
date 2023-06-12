@@ -36,7 +36,19 @@ public class OnePiece{
                 // Laço para andar nas colunas
                 for(int j = 0; j < colunas - 1; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
-                    proximo = linha.charAt(j + 1); // Salva o caractere a esquerda
+
+                    //Proximo
+                    if (j + 1 < colunas) 
+                    proximo = linha.charAt(j + 1); 
+                    else 
+                    proximo = linha.charAt(j);
+                    //Teste
+                    //Abaixo
+                    if ((i + 1) * colunas + j < linhas) 
+                    abaixo = linha.charAt((i + 1) * colunas + j);
+                    else 
+                    abaixo = linha.charAt(j);
+
                     //abaixo = linha.charAt(((i+1) * linhas) + j); // Salva o caractere abaixo
                     
 
@@ -68,11 +80,11 @@ public class OnePiece{
             leitor.close();
 
             //System.out.println(mapa.toString());
-            System.out.println(mapa.degree(0));
-            System.out.println(mapa.degree(1));
-            System.out.println(mapa.degree(2));
-            System.out.println(mapa.degree(3));
-            System.out.println(mapa.degree(4));
+            int count = 0;
+            while(count < 50){
+                System.out.print(mapa.degree(count)+" ");
+                count++;
+            }
 
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
