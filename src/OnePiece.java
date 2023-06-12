@@ -11,7 +11,9 @@ public class OnePiece{
         int colunas = 0;
         String linha = " ";
         String dimensoes = "";
-        char valor = ' ';
+        char atual = ' ';
+        char proximo = ' ';
+        char abaixo = ' ';
         char[] portos = new char[10];
                 
         File exemplo = new File("mapas/case0.map");
@@ -25,42 +27,51 @@ public class OnePiece{
             colunas = Integer.parseInt(partes[1]);
             tamanho = linhas * colunas;
             Graph mapa = new Graph(tamanho);
-
-
+            System.out.println(linhas);
+            System.out.println(colunas);
             // Laço para andar nas linhas
             for(int i = 0; i < linhas; i++){
                 linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
                 // Laço para andar nas colunas
                 for(int j = 0; j < colunas; j++) {
-
-                    valor = linha.charAt(j); // Salva o caractere de cada coluna 
-
+                    atual = linha.charAt(j); // Salva o caractere de cada coluna
+                    proximo = linha.charAt(j + 1); // Salva o caractere a esquerda
+                    abaixo = linha.charAt((i+1) * j); // Salva o caractere abaixo
+                    System.out.println(j);
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
-                    if(valor == '.' && (j + 1) != '*') {
-                        mapa.addEdge(valor, (j + 1));
+                    if(atual == '.' && proximo != '*' && j < colunas) {
+                        int aux = j + 1;
+                        mapa.addEdge(atual, aux);
+                        
                     }
 
                     // Verifica se o caractere abaixo é navegavel para criar uma aresta
-                    if(valor == '.' && ((i+1) * j) != '*') {
-                        mapa.addEdge(valor, ((i+1) * j));
-                    }
+                    //if(atual == '.' && abaixo != '*' && j < colunas && i < linhas) {
+                    //    mapa.addEdge(atual, ((i+1) * j));
+                    //}
 
                     // Salva os endereços dos portos
-                    if(valor == '1') portos[1] = valor;
-                    if(valor == '2') portos[2] = valor;
-                    if(valor == '3') portos[3] = valor;
-                    if(valor == '4') portos[4] = valor;
-                    if(valor == '5') portos[5] = valor;
-                    if(valor == '6') portos[6] = valor;
-                    if(valor == '7') portos[7] = valor;
-                    if(valor == '8') portos[8] = valor;
-                    if(valor == '9') portos[9] = valor;
+                    if(atual == '1') portos[1] = atual;
+                    if(atual == '2') portos[2] = atual;
+                    if(atual == '3') portos[3] = atual;
+                    if(atual == '4') portos[4] = atual;
+                    if(atual == '5') portos[5] = atual;
+                    if(atual == '6') portos[6] = atual;
+                    if(atual == '7') portos[7] = atual;
+                    if(atual == '8') portos[8] = atual;
+                    if(atual == '9') portos[9] = atual;
                 }
             }
 
             leitor.close();
 
-            System.out.println(mapa);
+            //System.out.println(mapa.toString());
+            //System.out.println(mapa.degree(1300));
+            //System.out.println(mapa.degree(1));
+            //System.out.println(mapa.degree(2));
+            //System.out.println(mapa.degree(3));
+            //System.out.println(mapa.degree(4));
+            //System.out.println(mapa.degree(5));
 
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
