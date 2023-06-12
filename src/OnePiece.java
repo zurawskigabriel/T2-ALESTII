@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class OnePiece{
     public static void main(String args[]){
+        int combustivel = 0;
         int tamanho = 0;
         int linhas = 0;
         int colunas = 0;
@@ -16,26 +17,33 @@ public class OnePiece{
         File exemplo = new File("mapas/case0.map");
         
         try {
-            Scanner leitor = new Scanner(exemplo);  
+            Scanner leitor = new Scanner(exemplo);
+            // Lê a linha com as dimensões e calcula o total de vértices para criar o grafo do mapa
             dimensoes = leitor.nextLine();
             String[] partes = dimensoes.split("\\D+");
             linhas = Integer.parseInt(partes[0]);
             colunas = Integer.parseInt(partes[1]);
             tamanho = linhas * colunas;
             Graph mapa = new Graph(tamanho);
-            
+
+            // Laço para andar nas linhas
             for(int i = 0; i < linhas; i++){
-                linha = leitor.nextLine();
+                linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
+                // Laço para andar nas colunas
                 for(int j = 0; j < colunas; j++) {
-                    valor = linha.charAt((i * colunas) + j);
+                    valor = linha.charAt((i * colunas) + j); // Salva o caractere de cada coluna 
+
+                    // Verifica se o caractere a direita é navegavel para criar uma aresta 
                     if(valor == '.' && ((i * colunas) + j) + 1 != '*') {
                         mapa.addEdge(valor, ((i * colunas) + j) + 1);
                     }
 
+                    // Verifica se o caractere abaixo é navegavel para criar uma aresta
                     if(valor == '.' && (((i+1) * colunas) + j) != '*') {
                         mapa.addEdge(valor, (((i+1) * colunas) + j));
                     }
 
+                    // Salva os endereços dos portos
                     if(valor == '1') portos[1] = valor;
                     if(valor == '2') portos[2] = valor;
                     if(valor == '3') portos[3] = valor;
@@ -49,7 +57,9 @@ public class OnePiece{
             }
 
             leitor.close();
-    
+
+            System.out.println(mapa.toDot());
+
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
         }
