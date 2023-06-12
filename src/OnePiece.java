@@ -30,11 +30,11 @@ public class OnePiece{
             Graph mapa = new Graph(tamanho);
 
             // Laço para andar nas linhas
-            for(int i = 0; i < linhas - 1; i++){
+            for(int i = 0; i < colunas - 1; i++){
                 linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
 
                 // Laço para andar nas colunas
-                for(int j = 0; j < colunas - 1; j++) {
+                for(int j = 0; j < linhas - 1; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
 
                     //Proximo
@@ -44,11 +44,13 @@ public class OnePiece{
                     proximo = linha.charAt(j);
                     //Teste
                     //Abaixo
+
+                    
                     if ((i + 1) * colunas + j < linhas) 
                     abaixo = linha.charAt((i + 1) * colunas + j);
                     else 
                     abaixo = linha.charAt(j);
-
+                    
                     //abaixo = linha.charAt(((i+1) * linhas) + j); // Salva o caractere abaixo
                     
 
