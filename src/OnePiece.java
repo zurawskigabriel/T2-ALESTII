@@ -68,11 +68,11 @@ public class OnePiece{
             leitor.close();
 
             //System.out.println(mapa.toString());
+            System.out.println(mapa.degree(0));
             System.out.println(mapa.degree(1));
             System.out.println(mapa.degree(2));
             System.out.println(mapa.degree(3));
             System.out.println(mapa.degree(4));
-            System.out.println(mapa.degree(5));
 
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
