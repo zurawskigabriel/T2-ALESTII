@@ -82,11 +82,15 @@ public class OnePiece{
             leitor.close();
 
             //System.out.println(mapa.toString());
-            int count = 0;
-            while(count < 50){
-                System.out.print(mapa.degree(count)+" ");
-                count++;
+            
+            for (int i = 0; i < linhas; i++) {
+                System.out.println();
+                for (int j = 0; j < colunas; j++) {
+                    int vertice = i * colunas + j;
+                    System.out.print(mapa.degree(vertice) + " ");
+                }
             }
+
 
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
