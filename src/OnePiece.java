@@ -44,7 +44,7 @@ public class OnePiece{
                 else linhaAbaixo = null;
 
                 // Laço para andar nas colunas
-                for(int j = 0; j < colunas; j++) {
+                for(int j = 0; j < colunas - 1; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
 
                     // Proximo
@@ -52,11 +52,11 @@ public class OnePiece{
                     else proximo = linha.charAt(j);
 
                     //Teste
-                    abaixo = (linhaAbaixo.charAt(j));
+                    /*abaixo = (linhaAbaixo.charAt(j));
                     if(i==25) {
                         System.out.print(abaixo);
                         //System.out.print(j);
-                    }
+                    }*/
 
                     
                     // Abaixo  
@@ -70,12 +70,12 @@ public class OnePiece{
                         mapa.addEdge(aux1, aux2);
                     } 
 
-                    // Verifica se o caractere a direita é navegavel para criar uma aresta
-                    if(atual != '*' && abaixo != '*' && j < colunas && i < linhas) {
+                    // Verifica se o caractere a baixo é navegavel para criar uma aresta
+                    /*if(atual != '*' && abaixo != '*' && j < colunas && i < linhas) {
                         int aux1 = (i * colunas) + j;
                         int aux2 = (((i + 1) * colunas) + j);
                         mapa.addEdge(aux1, aux2);
-                    }
+                    }*/
 
                     // Salva os endereços dos portos
                     if(atual == '1') portos[1] = atual;
