@@ -52,17 +52,16 @@ public class OnePiece{
                     else proximo = linha.charAt(j);
 
                     //Teste
-                    /*abaixo = (linhaAbaixo.charAt(j));
-                    if(i==25) {
+                    if (linhaAbaixo != null)
+                        abaixo = (linhaAbaixo.charAt(j));
+                    else
+                        abaixo = '*';
+                    
+                    if(i==24) {
                         System.out.print(abaixo);
                         //System.out.print(j);
-                    }*/
-
+                    }
                     
-                    // Abaixo  
-                    if (((i + 1) * colunas) + j < linhas) abaixo = linha.charAt(((i + 1) * colunas) + j);
-                    else abaixo = linha.charAt(j);
-                    //if(i == 1) System.out.print(abaixo);
 
 
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
@@ -73,7 +72,8 @@ public class OnePiece{
                     } 
 
                     // Verifica se o caractere a baixo é navegavel para criar uma aresta
-                    if(atual != '*' && abaixo != '*') {
+
+                    if(atual != '*' && abaixo != '*' && i < linhas - 2) {
                         int aux1 = (i * colunas) + j;
                         int aux2 = (((i + 1) * colunas) + j);
                         mapa.addEdge(aux1, aux2);
