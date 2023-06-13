@@ -44,7 +44,7 @@ public class OnePiece{
                 else linhaAbaixo = null;
 
                 // Laço para andar nas colunas
-                for(int j = 0; j < colunas - 1; j++) {
+                for(int j = 0; j < colunas; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
 
                     // Proximo
