@@ -10,10 +10,13 @@ public class OnePiece{
         int linhas = 0;
         int colunas = 0;
         String linha = " ";
+        String linhaAbaixo = " ";
+        String linhaAcima = " ";
         String dimensoes = "";
         char atual = ' ';
         char proximo = ' ';
         char abaixo = ' ';
+        char acima = ' ';
         char[] portos = new char[10];
                 
         File exemplo = new File("mapas/case0.map");
@@ -23,6 +26,7 @@ public class OnePiece{
 
             // Lê a linha com as dimensões e calcula o total de vértices para criar o grafo do mapa
             dimensoes = leitor.nextLine();
+            linha = dimensoes;
             String[] partes = dimensoes.split("\\D+");
             linhas = Integer.parseInt(partes[0]);
             colunas = Integer.parseInt(partes[1]);
@@ -30,9 +34,14 @@ public class OnePiece{
             Graph mapa = new Graph(tamanho);
 
             // Laço para andar nas linhas
+            linha = null;
+            linhaAbaixo = leitor.nextLine();
             for(int i = 0; i < linhas - 1; i++){
-                linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
-
+                linhaAcima = linha;
+                linha = linhaAbaixo;  // Salva a linha a ter as colunas percorridas
+                if (leitor.hasNextLine())
+                linhaAbaixo = leitor.nextLine();
+                else linhaAbaixo = null;
                 // Laço para andar nas colunas
                 for(int j = 0; j < colunas - 1; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
@@ -43,15 +52,32 @@ public class OnePiece{
                     else 
                     proximo = linha.charAt(j);
                     //Teste
-                    //Abaixo
+
+                    //Abaixo e acima
+                    if (linhaAbaixo != null)
+                    abaixo = (linhaAbaixo.charAt(j));
+                    else{
+                        abaixo = '*';
+                        System.out.println("ABAIXO");
+
+                    } 
+
+                    if (linhaAcima != null)
+                    acima = (linhaAcima.charAt(j));
+                    else{
+                        acima = '*';
+                        System.out.println("ACIMA");
+                    } 
 
                     
+                    /* 
                     if ((i + 1) * colunas + j < linhas) 
                     abaixo = linha.charAt((i + 1) * colunas + j);
                     else 
                     abaixo = linha.charAt(j);
-                    
-                    //abaixo = linha.charAt(((i+1) * linhas) + j); // Salva o caractere abaixo
+                    */
+
+                    //abaixo = linha.charAt((i + 1) * colunas + j);
                     
 
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
@@ -60,13 +86,31 @@ public class OnePiece{
                         int aux2 = (i * colunas) + (j + 1);
                         mapa.addEdge(aux1, aux2);
                     }
+                    
 
-                    // Verifica se o caractere abaixo é navegavel para criar uma aresta
-                    //if(atual == '.' && abaixo != '*' && j < colunas && i < linhas) {
-                    //    mapa.addEdge(atual, ((i+1) * j));
-                    //}
+                    //Comenta esses dois IFs se quiser ver sem o erro
+                    if(atual == '.' && abaixo != '*' && j < colunas) {
+                        int aux1 = (i * colunas) + j;
+                        int aux2 = ((i + 1) * colunas) + j;
+                        mapa.addEdge(aux1, aux2);
+                    }
+
+                    if(atual == '.' && acima != '*' && j < colunas) {
+                        int aux1 = (i * colunas) + j;
+                        int aux2 = ((i - 1) * colunas) + j;
+                        mapa.addEdge(aux1, aux2);
+                    }
+
+                    //Verifica se o caractere abaixo é navegavel para criar uma aresta
+
+                    /* 
+                    if(atual == '.' && abaixo != '*' && j < colunas && i < linhas) {
+                        mapa.addEdge(atual, ((i+1) * j));
+                    }
+                    */
 
                     // Salva os endereços dos portos
+                    
                     if(atual == '1') portos[1] = atual;
                     if(atual == '2') portos[2] = atual;
                     if(atual == '3') portos[3] = atual;
@@ -83,13 +127,14 @@ public class OnePiece{
 
             //System.out.println(mapa.toString());
             
-            for (int i = 0; i < linhas; i++) {
+            for (int i = 0; i < linhas - 1; i++) {
                 System.out.println();
                 for (int j = 0; j < colunas; j++) {
                     int vertice = i * colunas + j;
                     System.out.print(mapa.degree(vertice) + " ");
                 }
             }
+
 
 
         } catch(FileNotFoundException e) {
