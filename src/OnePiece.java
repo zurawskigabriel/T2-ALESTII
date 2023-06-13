@@ -62,6 +62,8 @@ public class OnePiece{
                     // Abaixo  
                     if (((i + 1) * colunas) + j < linhas) abaixo = linha.charAt(((i + 1) * colunas) + j);
                     else abaixo = linha.charAt(j);
+                    //if(i == 1) System.out.print(abaixo);
+
 
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
                     if(atual != '*' && proximo != '*' && j < colunas - 1) {
@@ -71,11 +73,12 @@ public class OnePiece{
                     } 
 
                     // Verifica se o caractere a baixo é navegavel para criar uma aresta
-                    /*if(atual != '*' && abaixo != '*' && j < colunas && i < linhas) {
+                    if(atual != '*' && abaixo != '*') {
                         int aux1 = (i * colunas) + j;
                         int aux2 = (((i + 1) * colunas) + j);
                         mapa.addEdge(aux1, aux2);
-                    }*/
+                        if(i == 1) System.out.print(abaixo);
+                    }
 
                     // Salva os endereços dos portos
                     if(atual == '1') portos[1] = atual;
