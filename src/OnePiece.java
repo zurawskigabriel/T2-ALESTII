@@ -56,32 +56,32 @@ public class OnePiece{
                     //Abaixo e acima
                     if (linhaAbaixo != null)
                     abaixo = (linhaAbaixo.charAt(j));
-                    else{
-                        abaixo = '*';
-                        System.out.println("ABAIXO");
+                    else
+                    abaixo = '*';
 
-                    } 
+                    System.out.println(abaixo);
+
+                    /* 
 
                     if (linhaAcima != null)
                     acima = (linhaAcima.charAt(j));
                     else{
                         acima = '*';
-                        System.out.println("ACIMA");
-                    } 
-
+                        System.out.println(acima);
+                    }
+                    */
                     
-                    /* 
-                    if ((i + 1) * colunas + j < linhas) 
-                    abaixo = linha.charAt((i + 1) * colunas + j);
+                     /* 
+                    if (((i + 1) * colunas) + j < linhas) 
+                    abaixo = linha.charAt(((i + 1) * colunas) + j);
                     else 
                     abaixo = linha.charAt(j);
+
+                    System.out.println(abaixo);
                     */
 
-                    //abaixo = linha.charAt((i + 1) * colunas + j);
-                    
-
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
-                    if(atual == '.' && proximo != '*' && j < colunas) {
+                    if(atual != '*' && proximo != '*' && j < colunas) {
                         int aux1 = (i * colunas) + j;
                         int aux2 = (i * colunas) + (j + 1);
                         mapa.addEdge(aux1, aux2);
@@ -89,17 +89,20 @@ public class OnePiece{
                     
 
                     //Comenta esses dois IFs se quiser ver sem o erro
-                    if(atual == '.' && abaixo != '*' && j < colunas) {
+
+                    
+                    if(atual != '*' && abaixo != '*' && j < colunas && i < linhas) {
                         int aux1 = (i * colunas) + j;
-                        int aux2 = ((i + 1) * colunas) + j;
+                        int aux2 = (((i + 1) * colunas) + j);
                         mapa.addEdge(aux1, aux2);
                     }
+                    
 
-                    if(atual == '.' && acima != '*' && j < colunas) {
+                    /*if(atual != '*' && acima != '*' && j < colunas) {
                         int aux1 = (i * colunas) + j;
                         int aux2 = ((i - 1) * colunas) + j;
                         mapa.addEdge(aux1, aux2);
-                    }
+                    }*/
 
                     //Verifica se o caractere abaixo é navegavel para criar uma aresta
 
@@ -131,7 +134,7 @@ public class OnePiece{
                 System.out.println();
                 for (int j = 0; j < colunas; j++) {
                     int vertice = i * colunas + j;
-                    System.out.print(mapa.degree(vertice) + " ");
+                    System.out.print(mapa.degree(vertice));
                 }
             }
 
