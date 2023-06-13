@@ -34,7 +34,7 @@ public class OnePiece{
                 linha = leitor.nextLine();  // Salva a linha a ter as colunas percorridas
 
                 // Laço para andar nas colunas
-                for(int j = 0; j < linhas - 1; j++) {
+                for(int j = 0; j < colunas - 1; j++) {
                     atual = linha.charAt(j); // Salva o caractere de cada coluna
 
                     //Proximo
@@ -56,8 +56,8 @@ public class OnePiece{
 
                     // Verifica se o caractere a direita é navegavel para criar uma aresta 
                     if(atual == '.' && proximo != '*' && j < colunas) {
-                        int aux1 = (i * linhas) + j;
-                        int aux2 = (i * linhas) + (j + 1);
+                        int aux1 = (i * colunas) + j;
+                        int aux2 = (i * colunas) + (j + 1);
                         mapa.addEdge(aux1, aux2);
                     }
 
