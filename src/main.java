@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class main{
+public class Main{
     public static void main(String args[]){
         int proximoPorto = 0;
         int ultimoPorto = 9;
@@ -87,9 +87,13 @@ public class main{
             /////////////////////////////////// Navegação ///////////////////////////////////
 
             for(int i = 1; i < 9; i++){
-                CaminhamentoEmLargura jornada = new CaminhamentoEmLargura(mapa, portos[i]);
+                System.out.println(portos[i]);
+            }
 
-                if(jornada.hasPath(portos[i + 1])) {
+            for(int i = 1; i < 9; i++){
+                BreadthFirstPaths jornada = new BreadthFirstPaths(mapa, portos[i]);
+
+                if(jornada.hasPathTo(portos[i + 1])) {
                     for(int distancia: jornada.pathTo(portos[i + 1])) {    
                         combustivel++;
                         combustivelTotal++;
@@ -109,7 +113,7 @@ public class main{
                             break;
                         }
 
-                        if(jornada.hasPath(portos[proximoPorto])) {
+                        if(jornada.hasPathTo(portos[proximoPorto])) {
                             for(int distancia: jornada.pathTo(portos[proximoPorto])) {    
                                 combustivel++;
                                 combustivelTotal++;
@@ -133,9 +137,7 @@ public class main{
 
             /////////////////////////////////// Retorno ///////////////////////////////////
 
-            //System.out.println(ultimoPorto);
-
-            CaminhamentoEmLargura jornada = new CaminhamentoEmLargura(mapa, portos[ultimoPorto]);
+            BreadthFirstPaths jornada = new BreadthFirstPaths(mapa, portos[ultimoPorto]);
             for(int distancia: jornada.pathTo(portos[1])) {    
                 combustivel++;
                 combustivelTotal++;
@@ -145,8 +147,6 @@ public class main{
             System.out.printf("Combustivel gasto do porto %d até o porto %d: %d\n", ultimoPorto, 1, combustivel);
             combustivel = 0;
             System.out.println("O minimo de combustível para realizar essa viagem é: " +combustivelTotal);
-
-
 
         } catch(FileNotFoundException e) {
             System.out.println("Arquivo não encontrado");
